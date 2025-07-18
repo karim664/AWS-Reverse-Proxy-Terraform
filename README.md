@@ -61,6 +61,7 @@ This project uses **Terraform** to build a fully functional infrastructure on **
 
 - **VPC CIDR**: `10.0.0.0/16`
 - **SUBNETS**:
+
 | Subnet      | Type    | Component                           | Availability Zone |
 |-------------|---------|-------------------------------------|-------------------|
 | Subnet 1    | Public  | Reverse Proxy Server                | us-east-1a        |
@@ -68,6 +69,7 @@ This project uses **Terraform** to build a fully functional infrastructure on **
 | Subnet 3    | Private | BackEnd Web Server                  | us-east-1a        |
 | Subnet 4    | Private | BackEnd Web Server                  | us-east-1b        |
 
+---
 - **NAT Gateway** in `public-subnet-1`
 - **Internet Gateway** attached to the VPC
 - **Load Balancers**:
@@ -127,6 +129,20 @@ terraform destroy
   - Accessible only within the VPC (CIDR: 10.0.0.0/16)
 - **NAT Gateway**:
   - Allows internet access for private instances without exposing them publicly
+
+---
+
+### 🔐 Security Group Rules
+
+| Component     | Inbound Rules                                 | Outbound Rules                  |
+|---------------|-----------------------------------------------|---------------------------------|
+| **FrontALB**  | Allow HTTP (80) from anywhere                 | Default (All traffic)           |
+| **Proxy**     | Allow HTTP (80) / ssh from Front ALB SG only  | Default (All traffic)           |
+| **BE-ALB**    | Allow HTTP (80) from Front ALB SG only        | (no outbound needed)            |
+| **WEB SERVER**| Allow HTTP (80) / ssh from Front ALB SG only  | (no outbound needed)            |
+
+FrontALB Security Group
+![EC2 SG](./screenshots/EC2-SG.png)
 
 ---
 
