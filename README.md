@@ -11,6 +11,12 @@ This project uses **Terraform** to build a fully functional infrastructure on **
 
 ---
 
+## 📸 Architecture Diagram
+
+![Architecture Demo](./Terraform%20AWS%20Infrastructure%20Project.gif)
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -24,6 +30,7 @@ This project uses **Terraform** to build a fully functional infrastructure on **
 ├── terraform.tfstate        # Local state (use remote in production)
 ├── terraform.tfstate.backup # Backup of state
 ├── .terraform.lock.hcl      # Provider version lock
+├── Terraform AWS...gif      # Architecture Diagram
 ├── modules/                 # Reusable infrastructure modules
 │   ├── backend-instance/
 │   ├── proxy-server-mod/
@@ -53,12 +60,14 @@ This project uses **Terraform** to build a fully functional infrastructure on **
 ## 🧱 Infrastructure Components
 
 - **VPC CIDR**: `10.0.0.0/16`
-- **Public Subnets**:
-  - `10.0.1.0/24` (AZ: `us-east-1a`)
-  - `10.0.2.0/24` (AZ: `us-east-1b`)
-- **Private Subnets**:
-  - `10.0.3.0/24` (AZ: `us-east-1a`)
-  - `10.0.4.0/24` (AZ: `us-east-1b`)
+- **SUBNETS**:
+| Subnet      | Type    | Component                           | Availability Zone |
+|-------------|---------|-------------------------------------|-------------------|
+| Subnet 1    | Public  | Reverse Proxy Server                | us-east-1a        |
+| Subnet 2    | Public  | Reverse Proxy Server                | us-east-1b        |
+| Subnet 3    | Private | BackEnd Web Server                  | us-east-1a        |
+| Subnet 4    | Private | BackEnd Web Server                  | us-east-1b        |
+
 - **NAT Gateway** in `public-subnet-1`
 - **Internet Gateway** attached to the VPC
 - **Load Balancers**:
