@@ -137,11 +137,11 @@ terraform destroy
 | Component     | Inbound Rules                                 | Outbound Rules                  |
 |---------------|-----------------------------------------------|---------------------------------|
 | **FrontALB**  | Allow HTTP (80) from anywhere                 | Default (All traffic)           |
-| **Proxy**     | Allow HTTP (80) / ssh from Front ALB SG only  | Default (All traffic)           |
+| **Proxy**     | Allow HTTP (80) / SSH from Front ALB SG only  | Default (All traffic)           |
 | **BE-ALB**    | Allow HTTP (80) from Front ALB SG only        | (no outbound needed)            |
-| **WEB SERVER**| Allow HTTP (80) / ssh from Front ALB SG only  | (no outbound needed)            |
+| **WEB SERVER**| Allow HTTP (80) / SSH from Front ALB SG only  | (no outbound needed)            |
 
-FrontALB Security Group
+FrontEnd Security Group
 ![EC2 SG](./screenshots/EC2-SG.png)
 
 ---
